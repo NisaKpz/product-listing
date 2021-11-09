@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #FAFAFA;
+}
+
+* {
+    box-sizing: border-box;
+
+}
+
+
+html {
+      width: 100%;
+}
