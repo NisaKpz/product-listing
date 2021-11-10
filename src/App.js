@@ -130,6 +130,8 @@ const sortItems = (sortType, items) => {
     case "timeAscending":
       arrayForSort.sort((a, b) => new Date(a.added) - new Date(b.added));
       break;
+      default: 
+        break;
   } 
 
   return arrayForSort;
@@ -153,24 +155,23 @@ function App() {
   useEffect(() => {
     dispatch(fetchProductItems());
     dispatch(fetchCompanies());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-      const allTags = [];
-      productItems.length > 0 && setSortedProductItems(
-        sortItems("priceAscending", productItems)
-      );
-      productItems.forEach((item) => {
-        item.tags.forEach((itemTag) => {
-          const index = allTags.findIndex((tag) => tag.name === itemTag);
-          if (index === -1) {
-            allTags.push({ name: itemTag, slug: itemTag });
-          }
-        });
+    const allTags = [];
+    productItems.length > 0 &&
+      setSortedProductItems(sortItems("priceAscending", productItems));
+    productItems.forEach((item) => {
+      item.tags.forEach((itemTag) => {
+        const index = allTags.findIndex((tag) => tag.name === itemTag);
+        if (index === -1) {
+          allTags.push({ name: itemTag, slug: itemTag });
+        }
       });
+    });
 
-      setTags([...allTags]);
-  }, [productItems])
+    setTags([...allTags]);
+  }, [productItems, dispatch]);
 
   const sortChangeHandler = (sortType) => {
     setSortedProductItems(sortItems(sortType, productItems));
@@ -178,19 +179,20 @@ function App() {
 
 
   return (
-    <div>
+    <>
       <Header />
       <Content showBasket={basketItems.length}>
+        {/* Mobile view */}
         <FilterBar>
           <FilterBarUl>
             <FilterBarli>
               <span>
-                <span class="_1indv hb-button__text">Sırala</span>
+                <span>Sırala</span>
               </span>
             </FilterBarli>
             <FilterBarli>
               <span>
-                <span class="_1indv hb-button__text">Filtrele</span>
+                <span>Filtrele</span>
               </span>
             </FilterBarli>
           </FilterBarUl>
@@ -219,7 +221,7 @@ function App() {
         </BasketContainer>
       </Content>
       <Footer />
-    </div>
+    </>
   );
 }
 

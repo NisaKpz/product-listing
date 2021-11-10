@@ -1,8 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
-import logo from "../../assets/Logo.svg";
-import basket from "../../assets/basket.svg";
 import Colors from "../../constants/Colors";
 import styled from "styled-components";
 
@@ -33,8 +30,6 @@ const SpanDot = styled.span`
 
 
 const Footer = () => {
-  const totalPrice = useSelector((state) => state.basket.totalPrice);
-
   return (
     <StyledFooter>
       <Span>©2019 Market</Span>

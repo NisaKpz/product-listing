@@ -98,7 +98,7 @@ const Basket = () => {
       (id) => {
         dispatch(basketActions.removeItemFromBasket(id));
       },
-      [basketActions]
+      [dispatch]
     );
 
     const onAddItem = useCallback(
@@ -111,7 +111,7 @@ const Basket = () => {
           })
         );
       },
-      [basketActions]
+      [dispatch]
     );
 
     return (
